@@ -2,7 +2,7 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-
+require("dotenv").config();
 const apiPostRoutes = require("./routes/api/apiPostRotes");
 const apiContactRoutes = require("./routes/api/apiContactRouter");
 
@@ -12,13 +12,15 @@ const createPath = require("./helpers/createPath");
 
 const app = express();
 
+// const errMsg = chalk.bgKeyword("white").redBright;
+// const successMsg = chalk.bgKeyword("green").white;
+
 app.set("view engine", "ejs");
 
 const PORT = 5000;
-const db = "mongodb+srv://RomanRymarchuk:roman123@cluster0.yzne2th.mongodb.net/?retryWrites=true&w=majority";
 
 mongoose
-   .connect(db)
+   .connect(process.env.MONGO_URL)
    .then((res) => console.log("Connected to DB "))
    .catch((error) => console.log(error));
 
