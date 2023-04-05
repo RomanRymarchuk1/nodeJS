@@ -2,9 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+
+const apiPostRoutes = require("./routes/api/apiPostRotes");
+const apiContactRoutes = require("./routes/api/apiContactRouter");
+
 const postRouter = require("./routes/postRouter");
 const contactRouter = require("./routes/contactRouter");
 const createPath = require("./helpers/createPath");
+
 const app = express();
 
 app.set("view engine", "ejs");
@@ -33,6 +38,8 @@ app.get("/", (req, res) => {
 
 app.use(postRouter);
 app.use(contactRouter);
+app.use(apiPostRoutes);
+app.use(apiContactRoutes);
 
 app.get("/about-us", (req, res) => {
    res.redirect("/contacts");
