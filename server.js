@@ -17,15 +17,13 @@ const app = express();
 
 app.set("view engine", "ejs");
 
-const PORT = 5000;
-
 mongoose
    .connect(process.env.MONGO_URL)
    .then((res) => console.log("Connected to DB "))
    .catch((error) => console.log(error));
 
-app.listen(PORT, (err) => {
-   err ? console.log(err) : console.log(`Runing on port ${PORT}`);
+app.listen(process.env.PORT, (err) => {
+   err ? console.log(err) : console.log(`Runing on port ${process.env.PORT}`);
 });
 
 app.use(express.urlencoded({ extended: false }));
